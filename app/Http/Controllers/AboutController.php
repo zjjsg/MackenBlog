@@ -7,7 +7,7 @@ use App\Model\Article;
 use App\User;
 use Illuminate\Http\Request;
 
-class AboutController extends Controller {
+class AboutController extends CommonController {
 
 
 	/**
@@ -25,7 +25,6 @@ class AboutController extends Controller {
             return redirect('/');
         }
         $userArticle = Article::getArticleModelByUserId($id);
-        viewInit();
         return homeView('about',[
             'userInfo'=>$userInfo,
             'userArticle'=>$userArticle

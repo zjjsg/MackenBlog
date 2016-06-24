@@ -47,8 +47,8 @@ if (!function_exists('conversionClassPath')) {
 }
 if (!function_exists('homeView')) {
     /**
-     * 展示前台view
-     * @author 袁超
+     * frontend view function
+     * @author Macken
      * @param  string $view
      * @param  array $data
      * @param  array $mergeData
@@ -56,12 +56,8 @@ if (!function_exists('homeView')) {
      */
     function homeView($view = null, $data = array(), $mergeData = array())
     {
-        $factory = app('Illuminate\Contracts\View\Factory');
-        if (func_num_args() === 0) {
-            return $factory;
-        }
         $themes = THEMES_NAME . '.' . Config::get('app.themes');
-        return $factory->make($themes . '.' . $view, $data, $mergeData);
+        return view()->make($themes . '.' . $view, $data, $mergeData);
     }
 }
 if (!function_exists('homeAsset')) {
@@ -123,17 +119,17 @@ if (!function_exists('viewInit')) {
      */
     function viewInit()
     {
-        $article = app('App\Model\Article');
-        $tags = app('App\Model\Tag');
-        $view = app('view');
-        $nav = app('App\Model\Navigation');
-        $links = app('App\Model\Links');
+        // $article = app('App\Model\Article');
+        // $tags = app('App\Model\Tag');
+        // $view = app('view');
+        // $nav = app('App\Model\Navigation');
+        // $links = app('App\Model\Links');
 
 
-        $view->share('hotArticleList', $article::getHotArticle(3));
-        $view->share('tagList', $tags::getHotTags(12));
-        $view->share('navList', $nav::getNavigationAll());
-        $view->share('linkList', $links::getLinkList());
+        // $view->share('hotArticleList', $article::getHotArticle(3));
+        // $view->share('tagList', $tags::getHotTags(12));
+        // $view->share('navList', $nav::getNavigationAll());
+        // $view->share('linkList', $links::getLinkList());
     }
 }
 

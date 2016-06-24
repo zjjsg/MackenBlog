@@ -1,8 +1,5 @@
 <?php
-/**
- * User: 袁超<yccphp@163.com>
- * Time: 2015.07.18 下午9:14
- */
+
 namespace App\Components;
 
 use Illuminate\Http\Request;

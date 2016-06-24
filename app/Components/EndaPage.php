@@ -1,8 +1,5 @@
 <?php
-/**
- * User: 袁超<yccphp@163.com>
- * Time: 2015.11.12 下午6:16
- */
+
 namespace App\Components;
 
 use Illuminate\Contracts\Pagination\Presenter;

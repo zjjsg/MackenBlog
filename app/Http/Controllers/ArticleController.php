@@ -1,16 +1,12 @@
 <?php namespace App\Http\Controllers;
 
 use App\Components\EndaPage;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use App\Model\Tag;
-use Illuminate\Http\Request;
 
 use App\Model\ArticleStatus;
 use App\Model\Article;
 
-class ArticleController extends Controller
+class ArticleController extends CommonController
 {
 
     /**
@@ -20,9 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
         $article = Article::getNewsArticle(8);
-        viewInit();
         $page = new EndaPage($article['page']);
         return homeView('index', array(
             'articleList' => $article,
@@ -45,7 +39,6 @@ class ArticleController extends Controller
         $data = array(
             'article' => $article,
         );
-        viewInit();
         return homeView('article', $data);
     }
 

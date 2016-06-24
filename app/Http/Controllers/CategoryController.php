@@ -7,7 +7,7 @@ use App\Model\Article;
 use App\Model\Category;
 use Illuminate\Http\Request;
 use App\Components\EndaPage;
-class CategoryController extends Controller
+class CategoryController extends CommonController
 {
 
     /**
@@ -18,8 +18,6 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
-        viewInit();
         $category = Category::getCatInfoModelByAsName($id);
         if (empty($category)) {
             return redirect(url(route('article.index')));

@@ -50,7 +50,6 @@ class ArticleController extends Controller
      */
     public function store(ArticleForm $result)
     {
-        //
         try {
 
             $data = array(
@@ -85,7 +84,6 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
         return Article::select('content')->find($id)->content;
     }
 

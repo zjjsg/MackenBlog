@@ -222,7 +222,9 @@ class Article extends Model
     }
     public static function getArticleListByTagId($tagId)
     {
-        if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_TAG_ARTICLE_CACHE . $tagId))) {
+        $page = Input::get('page', 1);
+        $cacheName = $page. '_' . md5($tagId);
+        if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_TAG_ARTICLE_CACHE . $cacheName))) {
             $model = self::select('id')->whereRaw(
                 'find_in_set(?, tags)',
                 [$tagId]

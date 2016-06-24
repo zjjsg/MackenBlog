@@ -9,7 +9,7 @@ use App\Model\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-class SearchController extends Controller
+class SearchController extends CommonController
 {
 
     public function getKeyword(Request $request)
@@ -21,7 +21,6 @@ class SearchController extends Controller
         $article = Article::getArticleListByKeyword($keyword);
 
         $page = new EndaPage($article['page']);
-        viewInit();
         return homeView('search', [
             'articleList' => $article,
             'keyword' => $keyword,
@@ -35,7 +34,6 @@ class SearchController extends Controller
 
         $article = Article::getArticleListByTagId($id);
         $page = new EndaPage($article['page']);
-        viewInit();
         return homeView('searchTag', [
             'articleList' => $article,
             'tagName' => Tag::getTagNameByTagId($id),
