@@ -78,7 +78,6 @@ class NavigationController extends Controller
      */
     public function edit($id)
     {
-        //
         return backendView('edit', [
             'nav' => Navigation::find($id),
         ]);

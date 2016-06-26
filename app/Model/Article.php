@@ -6,8 +6,6 @@ use Auth, Input, Request, Cache;
 
 class Article extends Model
 {
-
-    //
     const REDIS_NEW_ARTICLE_CACHE = 'redis_new_article_cache_';
 
     const REDIS_ARTICLE_CACHE = 'redis_article_cache_';
@@ -45,12 +43,12 @@ class Article extends Model
 
     public function user()
     {
-        return $this->hasOne('App\User', 'id', 'user_id');
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function category()
     {
-        return $this->hasOne('App\Model\Category', 'id', 'cate_id');
+        return $this->belongsTo('App\Model\Category', 'cate_id', 'id');
     }
 
     /**
@@ -90,7 +88,7 @@ class Article extends Model
     public static function getArticleModelByArticleId($articleId)
     {
         if (empty($article = Cache::get(self::REDIS_ARTICLE_CACHE . $articleId))) {
-            $article = self::find($articleId);
+            $article = self::with('category')->find($articleId);
             Cache::add(self::REDIS_ARTICLE_CACHE . $articleId, $article, self::$cacheMinutes);
         }
         return $article;
@@ -107,7 +105,7 @@ class Article extends Model
         $page = Input::get('page', 1);
         $cacheName = $page.'_'.$limit;
         if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_NEW_ARTICLE_CACHE . $cacheName))) {
-            $model = self::select('id')->orderBy('id', 'DESC')->simplePaginate($limit);
+            $model = self::select('id')->orderBy('id', 'DESC')->paginate($limit);
             Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->put(self::REDIS_NEW_ARTICLE_CACHE . $cacheName, $model, self::$cacheMinutes);
         }
 
@@ -133,7 +131,7 @@ class Article extends Model
 
         $cacheName = $page . '_' . $catId.'_'.$limit;
         if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_CATE_ARTICLE_CACHE . $cacheName))) {
-            $model = self::select('id')->where('cate_id', $catId)->orderBy('id', 'desc')->simplePaginate($limit);
+            $model = self::select('id')->where('cate_id', $catId)->orderBy('id', 'desc')->paginate($limit);
             Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->put(self::REDIS_CATE_ARTICLE_CACHE . $cacheName, $model, self::$cacheMinutes);
         }
 
@@ -205,7 +203,7 @@ class Article extends Model
         $cacheName = $page . '_' . md5($keyword);
 
         if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_SEARCH_ARTICLE_CACHE . $cacheName))) {
-            $model = self::select('id')->where('title', 'like', "%$keyword%")->orderBy('id', 'desc')->simplePaginate(10);
+            $model = self::select('id')->where('title', 'like', "%$keyword%")->orderBy('id', 'desc')->paginate(10);
             Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->put(self::REDIS_SEARCH_ARTICLE_CACHE . $cacheName, $model, self::$cacheMinutes);
         }
 
@@ -228,7 +226,7 @@ class Article extends Model
             $model = self::select('id')->whereRaw(
                 'find_in_set(?, tags)',
                 [$tagId]
-            )->orderBy('id', 'desc')->simplePaginate(10);
+            )->orderBy('id', 'desc')->paginate(10);
 
             Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->put(self::REDIS_TAG_ARTICLE_CACHE . $tagId, $model, self::$cacheMinutes);
         }

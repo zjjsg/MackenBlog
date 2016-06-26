@@ -7,30 +7,20 @@
 @endsection
 
 @section('content')
-    <section class="banner">
-        <div class="collection-head">
-            <div class="container">
-                <div class="collection-title">
-                    <h1 class="collection-header">{{ $article->title }}</h1>
-                    <div class="collection-info">
-                        <span class="meta-info">
-                            <span class="octicon octicon-calendar"></span> {{ $article->created_at->format('Y-m-d') }}
-                        </span>
-                    </div>
-                    <div class="collection-info">
-                        <span class="meta-info">
-                            {{ strCut(conversionMarkdown($article->content),40) }}
-                        </span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="jumbotron geopattern" pattern-id="{{ $article->title }}">
+    <div class="container article-banner">
+        <h1 class="jumbotron-title">{{ $article->title }}</h1> 
+        <p class="jumbotron-desc">
+            {{ strCut(conversionMarkdown($article->content),40) }}
+        </p> 
+        <p class="jumbotron-desc"><span class="fa fa-calendar"></span> {{ $article->created_at->format('Y-m-d') }}</p>
+    </div>  
+</div>
+  
     <!-- /.banner -->
-    <section class="container content">
-        <div class="columns">
-            <div class="column three-fourths">
+    <section class="container">
+        <div class="row">
+            <div class="col-sm-8">
                 <article class="article-content markdown-body">
                     {!! conversionMarkdown($article->content) !!}
                 </article>
@@ -53,22 +43,7 @@
                 </div>
             </div>
 
-            <div class="column one-fourth">
-                <div id="author" class="clearfix">
-                    <a href="{{ url(route('about.show',['id'=>$article->user->id])) }}" title="{{ $article->user->name }}">
-                        <img class="img-circle" src="{{ asset('uploads'.'/'.$article->user->photo) }}" height="96" width="96" alt="{{ $article->user->name }}" title="{{ $article->user->name }}">
-                    </a>
-                    <div class="author-info">
-                        <h3>
-                            <a href="{{ url(route('about.show',['id'=>$article->user->id])) }}" title="{{ $article->user->name }}">
-                                {{ $article->user->name }}
-                            </a>
-                        </h3>
-                        <p>
-                            {!! strip_tags(conversionMarkdown($article->user->desc)) !!}
-                        </p>
-                    </div>
-                </div>
+            <div class="col-sm-4">
                 @include('themes.default.right')
             </div>
         </div>

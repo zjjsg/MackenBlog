@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Model\Article;
 use App\Model\Category;
 use Illuminate\Http\Request;
-use App\Components\EndaPage;
+use Illuminate\Pagination\BootstrapThreePresenter;
+
 class CategoryController extends CommonController
 {
 
@@ -22,11 +23,11 @@ class CategoryController extends CommonController
         if (empty($category)) {
             return redirect(url(route('article.index')));
         }
-        $article = Article::getArticleListByCatId($category->id, 10);
-        $page = new EndaPage($article['page']);
+        $articleList = Article::getArticleListByCatId($category->id, 10);
+        $page = new BootstrapThreePresenter($articleList['page']);
         return homeView('category', [
             'category' => $category,
-            'articleList' => $article,
+            'articleList' => $articleList,
             'page' => $page
         ]);
     }

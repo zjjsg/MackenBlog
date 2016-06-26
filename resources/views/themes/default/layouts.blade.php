@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans" prefix="og: http://ogp.me/ns#" class="han-init">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,77 +9,68 @@
 
     <link rel="stylesheet" href="{{ homeAsset('/vendor/primer-css/css/primer.css') }}">
     <link rel="stylesheet" href="{{ homeAsset('/vendor/primer-markdown/dist/user-content.min.css') }}">
+    <link rel="stylesheet" href="{{ homeAsset('/css/globals/bootstrap-paper.min.css') }}">
     <link rel="stylesheet" href="{{ homeAsset('/vendor/octicons/octicons/octicons.css') }}">
-    <link rel="stylesheet" href="{{ homeAsset('/css/components/collection.css') }}">
-    <link rel="stylesheet" href="{{ homeAsset('/css/components/repo-card.css') }}">
-    <link rel="stylesheet" href="{{ homeAsset('/css/sections/repo-list.css') }}">
+    <link rel="stylesheet" href="{{ homeAsset('/fonts/font-awesome-4.2.0/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ homeAsset('/css/sections/mini-repo-list.css') }}">
-    <link rel="stylesheet" href="{{ homeAsset('/css/components/boxed-group.css') }}">
-    <link rel="stylesheet" href="{{ homeAsset('/css/globals/common.css') }}">
+    <link rel="stylesheet" href="{{ homeAsset('/css/globals/reset.css') }}">
     <link rel="stylesheet" href="{{ homeAsset('/vendor/share.js/dist/css/share.min.css') }}">
     <link rel="stylesheet" href="{{ homeAsset('/css/globals/responsive.css') }}">
     <link rel="stylesheet" href="{{ homeAsset('/css/pages/index.css') }}">
-
-    <link rel="shortcut icon" href="{{ homeAsset('/images/ico/32.png') }}" sizes="32x32" type="image/png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ homeAsset('/images/ico/72.png') }}" type="image/png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ homeAsset('/images/ico/120.png') }}" type="image/png"/>
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ homeAsset('/images/ico/152.png') }}" type="image/png"/>
-    <meta property="og:type" content="article">
-    <meta property="og:locale" content="zh_CN" />
-
     <script src="{{ homeAsset('/vendor/jquery/dist/jquery.min.js') }}"></script>
 </head>
-<body class="home">
-<header class="site-header">
-    <div class="container">
-        <h1><a href="/">Enda Blog</a></h1>
-        <nav class="site-header-nav" role="navigation">
+<body>
+<!-- header -->
+<nav class="navbar navbar-default">
+<div class="container">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="/">Macken Cabin</a>
+  </div>
 
-            <a href="/" class=" site-header-nav-item" target="" title="Home">Home</a>
-
-
-            @if(!empty($navList))
-                @foreach($navList as $nav)
-                    <a href="{{ $nav->url }}" class="site-header-nav-item">{{ $nav->name }}</a>
-                @endforeach
-
-            @endif
-            <form class="demo_search" action="{{url('search/keyword')}}" method="get">
-                <i class="icon_search" id="open"></i>
-                <input class="demo_sinput" type="text" name="keyword" id="search_input" placeholder="输入关键字 回车搜索" />
-            </form>
-        </nav>
-
-
-    </div>
-</header>
-
+  <div class="navbar-collapse collapse" id="navbar-main">
+    <ul class="nav navbar-nav">
+        <li><a href="/" title="Home">主页</a></li>
+        @if(!empty($navList))
+            @foreach($navList as $nav)
+                <li><a href="{{ $nav->url }}" title="{{ $nav->name }}">{{ $nav->name }}</a></li>
+            @endforeach
+        @endif
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+         <form class="navbar-form navbar-left" role="search" action="{{url('search/keyword')}}">
+            {{ csrf_field() }}
+            <div class="form-group">
+                <input type="text" name="keyword" class="form-control" placeholder="输入关键字 回车搜索">
+            </div>
+            <button type="submit" class="btn btn-default fa fa-search"></button>
+        </form>
+    </ul>
+  </div>
+</div>
+</nav>
 <!-- / header -->
 
 
 @yield('content')
 
 
-<footer class="container">
-    <div class="site-footer" role="contentinfo">
-        <div class="copyright left mobile-block">
-            © 2015
-            <span >phpyc.com</span>
-            <a href="javascript:window.scrollTo(0,0)" class="right mobile-visible">TOP</a>
+<footer class="site-footer">
+        <div class="container">
+            <div class="copyright pull-left mobile-block">
+                © {{date('Y')}}
+                <span >macken.cn</span>
+            </div>
+            <a class="pull-right mobile-hidden" href="javascript:window.scrollTo(0,0)" ><span class="fa fa-arrow-circle-up fa-3x"></span></a>
         </div>
-
-        <ul class="site-footer-links right mobile-hidden">
-            <li>
-                <a href="javascript:window.scrollTo(0,0)" >TOP</a>
-            </li>
-        </ul>
-        <a href="https://github.com/yccphp/laravel-5-blog" target="_blank" aria-label="view source code">
-            <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
-        </a>
-
-    </div>
 </footer>
 <!-- / footer -->
+<script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="{{ homeAsset('/vendor/share.js/dist/js/share.min.js') }}"></script>
 <script src="{{ homeAsset('/vendor/share.js/dist/js/jquery.qrcode.min.js') }}"></script>
 <script src="{{ homeAsset('/js/geopattern.js') }}"></script>

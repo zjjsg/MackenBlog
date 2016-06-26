@@ -7,20 +7,14 @@
 @endsection
 
 @section('content')
-    <section class="banner">
-        <div class="collection-head">
-            <div class="container">
-                <div class="collection-title">
-                    <h1 class="collection-header">{{ $category->cate_name }}</h1>
-                    <div class="collection-info">
-                    <span class="meta-info">
-                        {{ $category->seo_desc }}
-                    </span>
-                    </div>
-                </div>
-            </div>
+    <div class="jumbotron geopattern" pattern-id="{{ $category->cate_name }}">
+        <div class="container article-banner">
+            <h1 class="jumbotron-title">分类：{{ $category->cate_name }}</h1> 
+            <p class="jumbotron-desc">
+                {{ $category->seo_desc }}
+            </p> 
         </div>
-    </section>
+    </div>
 
     <!-- /.banner -->
     <section class="container content">

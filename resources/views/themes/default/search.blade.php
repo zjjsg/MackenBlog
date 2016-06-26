@@ -7,23 +7,18 @@
 @endsection
 
 @section('content')
-<section class="banner">
-    <div class="collection-head">
-        <div class="container">
-            <div class="collection-title">
-                <h1 class="collection-header">{{ $keyword }}</h1>
-            </div>
-            <span class="meta-info">
-                Cool 善于搜索，才能学习更多的东西哦～
-            </span>
-        </div>
+<div class="jumbotron geopattern" pattern-id="{{ $keyword }}">
+    <div class="container article-banner">
+        <h1 class="jumbotron-title">{{ $keyword }}</h1> 
+        <p class="jumbotron-desc">
+            Cool 善于搜索，才能学习更多的东西哦～
+        </p> 
     </div>
-</section>
+</div>
 
-<!-- /.banner -->
-<section class="container content">
-    <div class="columns">
-        <div class="column two-thirds" >
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8" >
             <ol class="repo-list">
                 @if(!empty($articleList['data']))
                     @foreach($articleList['data'] as $article)
@@ -45,14 +40,14 @@
                 @else
 
                     <li class="repo-list-item">
-                        <h3 class="repo-list-name">
+                        <div class="well">
                             暂时没搜到关于关键字 <span style="color: #f4645f">{{ $keyword }}</span> 的内容，换个关键字试试吧～
-                        </h3>
+                        </div>
                     </li>
                 @endif
             </ol>
         </div>
-        <div class="column one-third">
+        <div class="col-sm-4">
             @include('themes.default.right')
         </div>
     </div>
@@ -61,8 +56,7 @@
            {!! $articleList['page']->appends(['keyword' => $keyword])->render($page) !!}
         </nav>
     </div>
-    <!-- /pagination -->
-</section>
-<!-- /section.content -->
+    
+</div>
 
 @endsection

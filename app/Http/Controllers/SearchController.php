@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Components\EndaPage;
+use Illuminate\Pagination\BootstrapThreePresenter;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -20,7 +20,7 @@ class SearchController extends CommonController
         }
         $article = Article::getArticleListByKeyword($keyword);
 
-        $page = new EndaPage($article['page']);
+        $page = new BootstrapThreePresenter($article['page']);
         return homeView('search', [
             'articleList' => $article,
             'keyword' => $keyword,
@@ -33,7 +33,7 @@ class SearchController extends CommonController
     {
 
         $article = Article::getArticleListByTagId($id);
-        $page = new EndaPage($article['page']);
+        $page = new BootstrapThreePresenter($article['page']);
         return homeView('searchTag', [
             'articleList' => $article,
             'tagName' => Tag::getTagNameByTagId($id),

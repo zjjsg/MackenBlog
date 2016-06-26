@@ -1,31 +1,25 @@
 @extends('themes.default.layouts')
 
 @section('header')
-    <title>{{ systemConfig('title','Enda Blog') }} -Powered By  {{ systemConfig('subheading','Enda Blog') }}</title>
+    <title>{{ systemConfig('title','') }}</title>
     <meta name="keywords" content="{{ systemConfig('seo_key') }}" />
     <meta name="description" content="{{ systemConfig('seo_desc') }}">
 @endsection
 
 @section('content')
-<section class="banner">
-    <div class="collection-head">
-        <div class="container">
-            <div class="collection-title">
-                <h1 class="collection-header">Yuan Chao</h1>
-                <div class="collection-info">
-                    <span class="meta-info">
-                        如果不能成为拯救世界的神，那就堕落到征服世界的魔吧！
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<div class="jumbotron">
+    <div class="container">  
+        <h1>麦肯先生</h1> 
+        <p>
+            如果不能成为拯救世界的神，那就堕落到征服世界的魔吧！
+        </p> 
+    </div>  
+</div>
 
 <!-- /.banner -->
 <section class="container content">
-    <div class="columns">
-        <div class="column two-thirds" >
+    <div class="row">
+        <div class="col-sm-8" >
             <ol class="repo-list">
                 @if(!empty($articleList))
                     @foreach($articleList['data'] as $article)
@@ -39,14 +33,14 @@
                                 {{ strCut(conversionMarkdown($article->content),80) }}
                             </p>
                             <p class="repo-list-meta">
-                                <span class="octicon octicon-calendar"></span>{{ $article->created_at->format('Y-m-d') }}
+                                <span class="fa fa-calendar"></span>{{ $article->created_at->format('Y-m-d') }} &nbsp;&nbsp;<span class="fa fa-folder-o"></span><a href="{{ route('category.show',array('as_name'=>$article->category->as_name)) }}">{{ $article->category->cate_name }}</a>
                             </p>
                         </li>
                     @endforeach
                 @endif
             </ol>
         </div>
-        <div class="column one-third">
+        <div class="col-sm-4">
             @include('themes.default.right')
         </div>
     </div>

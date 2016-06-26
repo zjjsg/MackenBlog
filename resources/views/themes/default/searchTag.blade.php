@@ -7,23 +7,18 @@
 @endsection
 
 @section('content')
-<section class="banner">
-    <div class="collection-head">
-        <div class="container">
-            <div class="collection-title">
-                <h1 class="collection-header">Tag：{{ $tagName }}</h1>
-            </div>
-            <span class="meta-info">
-                Cool 善于搜索，才能学习更多的东西哦～
-            </span>
-        </div>
+<div class="jumbotron geopattern" pattern-id="{{ $tagName }}">
+    <div class="container article-banner">
+        <h1 class="jumbotron-title">标签：{{ $tagName }}</h1> 
+        <p class="jumbotron-desc">
+            Cool 善于搜索，才能学习更多的东西哦～
+        </p> 
     </div>
-</section>
+</div>
 
-<!-- /.banner -->
-<section class="container content">
-    <div class="columns">
-        <div class="column two-thirds" >
+<section class="container">
+    <div class="row">
+        <div class="col-sm-8" >
             <ol class="repo-list">
                 @if(!empty($articleList['data']))
                     @foreach($articleList['data'] as $article)
@@ -52,7 +47,7 @@
                 @endif
             </ol>
         </div>
-        <div class="column one-third">
+        <div class="col-sm-4">
             @include('themes.default.right')
         </div>
     </div>

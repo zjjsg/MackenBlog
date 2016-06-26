@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Components\EndaPage;
+use Illuminate\Pagination\BootstrapThreePresenter;
 use App\Http\Controllers\Controller;
 
 use App\Model\ArticleStatus;
@@ -16,12 +16,9 @@ class ArticleController extends CommonController
      */
     public function index()
     {
-        $article = Article::getNewsArticle(8);
-        $page = new EndaPage($article['page']);
-        return homeView('index', array(
-            'articleList' => $article,
-            'page' => $page
-        ));
+        $articleList = Article::getNewsArticle(8);
+        $page = new BootstrapThreePresenter($articleList['page']);
+        return homeView('index', compact('articleList', 'page'));
     }
 
 
@@ -36,10 +33,7 @@ class ArticleController extends CommonController
         $article = Article::getArticleModelByArticleId($id);
 
         ArticleStatus::updateViewNumber($id);
-        $data = array(
-            'article' => $article,
-        );
-        return homeView('article', $data);
+        return homeView('article', ['article' => $article]);
     }
 
 }
