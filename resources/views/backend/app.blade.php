@@ -4,9 +4,9 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Laravel</title>
+	<title>麦肯后厨</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+	<link href="http://cdn.bootcss.com/bootswatch/3.3.6/lumen/bootstrap.min.css" rel="stylesheet">
 
     <script type="text/javascript" src="{{ asset('/plugin/jquery-1.9.1.js ') }}"></script>
 
@@ -27,6 +27,9 @@
            float: right;
             margin-right: 5px;
         }
+        .modal-dialog {
+        	z-index:10000;
+        }
     </style>
 </head>
 <body>
@@ -39,7 +42,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
+				<a class="navbar-brand" href="#">麦肯后厨</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -36,4 +36,18 @@ class ArticleController extends CommonController
         return homeView('article', ['article' => $article]);
     }
 
+    /**
+     * display the archived articles by month
+     * @param  [type] $year  [description]
+     * @param  [type] $month [description]
+     * @return [type]        [description]
+     */
+    public function archive($year, $month)
+    {
+        $archiveTitle = '归档：'.$year.'年 '.$month.'月';
+        $articleList = Article::getArchivedArticleList($year, $month, 8);
+        $page = new BootstrapThreePresenter($articleList['page']);
+        return homeView('archive', compact('articleList', 'page', 'archiveTitle'));
+    }
+
 }

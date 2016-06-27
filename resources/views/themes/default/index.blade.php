@@ -30,7 +30,7 @@
                                 </a>
                             </h3>
                             <p class="repo-list-description">
-                                {{ strCut(conversionMarkdown($article->content),80) }}
+                                {{ strCut(conversionMarkdown($article->content),76) }}
                             </p>
                             <p class="repo-list-meta">
                                 <span class="fa fa-calendar"></span>{{ $article->created_at->format('Y-m-d') }} &nbsp;&nbsp;<span class="fa fa-folder-o"></span><a href="{{ route('category.show',array('as_name'=>$article->category->as_name)) }}">{{ $article->category->cate_name }}</a>

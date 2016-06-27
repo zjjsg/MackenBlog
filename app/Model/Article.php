@@ -6,6 +6,8 @@ use Auth, Input, Request, Cache;
 
 class Article extends Model
 {
+    const REDIS_ARCHIVE_ARTICLE_CACHE = 'redis_archive_article_cache_';
+
     const REDIS_NEW_ARTICLE_CACHE = 'redis_new_article_cache_';
 
     const REDIS_ARTICLE_CACHE = 'redis_article_cache_';
@@ -88,7 +90,8 @@ class Article extends Model
     public static function getArticleModelByArticleId($articleId)
     {
         if (empty($article = Cache::get(self::REDIS_ARTICLE_CACHE . $articleId))) {
-            $article = self::with('category')->find($articleId);
+            $article = self::find($articleId);
+            $article->tags = \App\Model\Tag::getTagModelByTagIds($article->tags);
             Cache::add(self::REDIS_ARTICLE_CACHE . $articleId, $article, self::$cacheMinutes);
         }
         return $article;
@@ -117,6 +120,41 @@ class Article extends Model
         }
         $articleList['page'] = $model;
         return $articleList;
+    }
+
+    /**
+     * get archived articles
+     * @param int $year
+     * @param int $month
+     * @param int $limit
+     * @return mixed
+     */
+    public static function getArchivedArticleList($year, $month, $limit = 8)
+    {
+        $page = Input::get('page', 1);
+        $cacheName = $year.'_'.$month.'_'.$page.'_'.$limit;
+        if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_ARCHIVE_ARTICLE_CACHE . $cacheName))) {
+            $model = self::select('id')->where(\DB::raw("DATE_FORMAT(`created_at`, '%Y %c')"), '=', "$year $month")->orderBy('id', 'DESC')->paginate($limit);
+            Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->put(self::REDIS_ARCHIVE_ARTICLE_CACHE . $cacheName, $model, self::$cacheMinutes);
+        }
+
+        $articleList = array(
+            'data' => [],
+        );
+        foreach ($model as $key => $article) {
+            $articleList['data'][$key] = self::getArticleModelByArticleId($article->id);
+        }
+        $articleList['page'] = $model;
+        return $articleList;
+    }
+
+    public static function getArchiveList($limit = 12)
+    {
+        return self::select(\DB::raw("DATE_FORMAT(`created_at`, '%Y %m') as `archive`, count(*) as `count`"))
+                        ->orderBy('created_at', 'desc')
+                        ->groupBy('archive')
+                        ->limit($limit)
+                        ->get();
     }
 
     /**

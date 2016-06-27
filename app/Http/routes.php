@@ -12,10 +12,10 @@
 */
 
 Route::get('/', 'ArticleController@index');
-
+Route::get('archive/{year}/{month}', ['as' => 'article-archive-list', 'uses' => 'ArticleController@archive']);
 
 Route::resource('article', 'ArticleController');
-Route::resource('comment', 'CommentController');
+// Route::resource('comment', 'CommentController');
 Route::resource('category', 'CategoryController');
 Route::resource('about', 'AboutController');
 
@@ -34,7 +34,7 @@ Route::group(['prefix'=>'backend','middleware'=>'auth'],function(){
     Route::resource('article','backend\ArticleController');
     Route::resource('tags','backend\TagsController');
     Route::resource('user','backend\UserController');
-    Route::resource('comment','backend\CommentController');
+    // Route::resource('comment','backend\CommentController');
     Route::resource('nav','backend\NavigationController');
     Route::resource('links','backend\LinksController');
     Route::controllers([

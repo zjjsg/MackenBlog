@@ -10,10 +10,7 @@
 }
 
 @media (max-width:60em) {
-    .collection-card {
-        width: 45%;
-        height: 225px
-    }
+
 }
 
 @media (max-width:50em) {
@@ -84,22 +81,40 @@
     .markdown-body h5 {
         font-size: 1em
     }
+
+    .jumbotron h1 {
+        font-size:2.5em;
+    }
+    .jumbotron p {
+        font-size:1.2em;
+    }
+    .jumbotron-title {
+        font-size:2em !important;
+    }
+    .jumbotron-desc {
+        font-size:1.1em !important;
+    }
+    
 }
 
 @media (max-width:35em) {
-    .collection-card {
-        width: 100%;
-        max-width: 350px;
-        margin: 10px auto
+    .jumbotron h1 {
+        font-size:2.2em;
+    }
+    .jumbotron p {
+        font-size:1em;
+    }
+    .jumbotron-title {
+        font-size:1.8em !important;
+    }
+    .jumbotron-desc {
+        font-size:1em !important;
+    }
+    .jumbotron-meta {
+        font-size:0.9em !important;
     }
 }
 
 @media (max-width:20em) {
-    .site-header-nav .site-header-nav-item {
-        min-width: 20%
-    }
-    .collection-head .collection-info .meta-info {
-        display: block;
-        margin-top: 15px
-    }
+    
 }

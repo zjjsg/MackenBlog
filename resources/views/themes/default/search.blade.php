@@ -9,7 +9,7 @@
 @section('content')
 <div class="jumbotron geopattern" pattern-id="{{ $keyword }}">
     <div class="container article-banner">
-        <h1 class="jumbotron-title">{{ $keyword }}</h1> 
+        <h1 class="jumbotron-title">关键字：{{ $keyword }}</h1> 
         <p class="jumbotron-desc">
             Cool 善于搜索，才能学习更多的东西哦～
         </p> 

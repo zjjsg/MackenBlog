@@ -22,7 +22,7 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-    <div class="panel-title">标签云</div>
+    <div class="panel-title">标签</div>
     </div>
     <div class="content tag-cloud">
         @if(!empty($tagList))
@@ -35,16 +35,35 @@
 
 <section class="panel panel-primary">
     <div class="panel-heading">
+    <div class="panel-title">归档</div>
+    </div>
+    <ul class="list-group" id="archive-list">
+        @if(!empty($archiveList))
+            @foreach($archiveList as $v)
+                <a href="{{ route('article-archive-list', sscanf($v->archive, "%d %d")) }}">
+                <li class="list-group-item">
+                    <span class="badge">{{ $v->count }}</span>
+                        <span>
+                            {{ vsprintf("%s年  %s月", sscanf($v->archive, "%s %s")) }}
+                        </span>
+                    
+                </li>
+                </a>
+            @endforeach
+        @endif
+    </ul>
+</section>
+
+<section class="panel panel-primary">
+    <div class="panel-heading">
     <div class="panel-title">友情链接</div>
     </div>
-    <ul class="boxed-group-inner mini-repo-list">
+    <ul id="friend-links">
         @if(!empty($linkList))
             @foreach($linkList as $link)
-                <li class="public source ">
-                    <a href="{{ $link->url }}" target="_blank"  class="mini-repo-list-item css-truncate">
-                        <span class="repo-and-owner css-truncate-target">
+                <li>
+                    <a href="{{ $link->url }}" target="_blank" >
                             {{ $link->name }}
-                        </span>
                     </a>
                 </li>
             @endforeach

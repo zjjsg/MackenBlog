@@ -21,7 +21,7 @@
 </head>
 <body>
 <!-- header -->
-<nav class="navbar navbar-default">
+<nav id="site-header" class="navbar navbar-default">
 <div class="container">
   <div class="navbar-header">
     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
@@ -60,7 +60,7 @@
 @yield('content')
 
 
-<footer class="site-footer">
+<footer id="site-footer">
         <div class="container">
             <div class="copyright pull-left mobile-block">
                 © {{date('Y')}}
@@ -71,7 +71,7 @@
 </footer>
 <!-- / footer -->
 <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="{{ homeAsset('/vendor/share.js/dist/js/share.min.js') }}"></script>
+<script src="{{ homeAsset('/vendor/share.js/dist/js/jquery.share.min.js') }}"></script>
 <script src="{{ homeAsset('/vendor/share.js/dist/js/jquery.qrcode.min.js') }}"></script>
 <script src="{{ homeAsset('/js/geopattern.js') }}"></script>
 <script src="{{ homeAsset('/js/prism.js') }}"></script>
@@ -79,6 +79,7 @@
 
 <script>
     jQuery(document).ready(function($) {
+        
         // geopattern
         $('.geopattern').each(function(){
             $(this).geopattern($(this).data('pattern-id'));
