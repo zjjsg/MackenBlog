@@ -13,12 +13,11 @@
 
 Route::get('/', 'ArticleController@index');
 Route::get('archive/{year}/{month}', ['as' => 'article-archive-list', 'uses' => 'ArticleController@archive']);
+Route::get('about', 'AboutController@show');
 
 Route::resource('article', 'ArticleController');
 // Route::resource('comment', 'CommentController');
 Route::resource('category', 'CategoryController');
-Route::resource('about', 'AboutController');
-
 
 Route::controllers([
     'backend/auth' => 'backend\AuthController',

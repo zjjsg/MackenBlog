@@ -30,7 +30,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/">Macken Cabin</a>
+    <a class="navbar-brand" href="/">Macken Stack</a>
   </div>
 
   <div class="navbar-collapse collapse" id="navbar-main">

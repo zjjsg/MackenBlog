@@ -32,7 +32,7 @@
                                 {{ strCut(conversionMarkdown($article->content),80) }}
                             </p>
                             <p class="repo-list-meta">
-                                <span class="octicon octicon-calendar"></span>{{ $article->created_at->format('Y-m-d') }}
+                                <span class="octicon octicon-calendar"></span>{{ $article->created_at->format('Y-m-d') }} &nbsp;&nbsp;<span class="fa fa-folder-o"></span><a href="{{ route('category.show',array('as_name'=>$article->category->as_name)) }}">{{ $article->category->cate_name }}</a>
                             </p>
                         </li>
                     @endforeach

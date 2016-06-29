@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use DB;
 
 class CommonController extends Controller
 {
@@ -14,16 +13,11 @@ class CommonController extends Controller
 
         $view = app('Illuminate\Contracts\View\Factory');
 
-        $article = app('App\Model\Article');
-        $tags = app('App\Model\Tag');
-        $nav = app('App\Model\Navigation');
-        $links = app('App\Model\Links');
-
-        $view->share('hotArticleList', $article::getHotArticle(3));
-        $view->share('tagList', $tags::getHotTags(12));
-        $view->share('navList', $nav::getNavigationAll());
-        $view->share('archiveList', $article::getArchiveList(12));
-        $view->share('linkList', $links::getLinkList());
+        $view->share('hotArticleList', \App\Model\Article::getHotArticle(5));
+        $view->share('tagList', \App\Model\Tag::getHotTags(12));
+        $view->share('navList', \App\Model\Navigation::getNavigationAll());
+        $view->share('archiveList', \App\Model\Article::getArchiveList(12));
+        $view->share('linkList', \App\Model\Links::getLinkList());
     }
 
 }

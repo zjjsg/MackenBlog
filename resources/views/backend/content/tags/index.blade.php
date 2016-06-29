@@ -2,8 +2,9 @@
 
 @section('content')
         <div class="col-md-10">
+        {!! Notification::showAll() !!}
             <div class="panel panel-default">
-                {!! Notification::showAll() !!}
+                
                 <div class="panel-heading">内容管理</div>
 
                 <div class="panel-body">

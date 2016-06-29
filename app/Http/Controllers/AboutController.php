@@ -16,15 +16,15 @@ class AboutController extends CommonController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show()
 	{
 		//
 
-        $userInfo = User::getUserInfoModelByUserId($id);
+        $userInfo = User::getUserInfoModelByUserId(1);
         if(empty($userInfo)){
             return redirect('/');
         }
-        $userArticle = Article::getArticleModelByUserId($id);
+        $userArticle = Article::getArticleModelByUserId(1);
         return homeView('about',[
             'userInfo'=>$userInfo,
             'userArticle'=>$userArticle

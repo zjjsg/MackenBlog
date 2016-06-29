@@ -3,7 +3,7 @@
     <div class="panel-heading">
     <div class="panel-title">热门文章</div>
     </div>
-    <ul class="list-group">
+    <ul class="list-group" id="hot-article-list">
         @if(!empty($hotArticleList))
             @foreach($hotArticleList as $hotArticle)
                 <li class="list-group-item">
@@ -24,7 +24,7 @@
     <div class="panel-heading">
     <div class="panel-title">标签</div>
     </div>
-    <div class="content tag-cloud">
+    <div id="tag-cloud">
         @if(!empty($tagList))
             @foreach($tagList as $tag)
                 <a href="{{ url('search/tag',['id'=>$tag->id]) }}" title="{{ $tag->name }}">{{ $tag->name }}</a>

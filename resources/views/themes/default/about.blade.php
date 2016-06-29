@@ -1,25 +1,24 @@
 @extends('themes.default.layouts')
 
 @section('header')
-    <title>{{ $userInfo->name }}介绍_{{ systemConfig('title','Enda Blog') }}-Powered By{{ systemConfig('subheading','Enda Blog') }}</title>
-    <meta name="keywords" content="{{ $userInfo->name }},{{ systemConfig('seo_key') }}" />
+    <title>关于_{{ systemConfig('title','Macken Cabin') }}</title>
+    <meta name="keywords" content="关于,{{ systemConfig('seo_key') }}" />
     <meta name="description" content="{!! str_limit(preg_replace('/\s/', '',strip_tags(conversionMarkdown($userInfo->desc))),100) !!}">
 @endsection
 
 @section('content')
-    <section class="banner">
-        <div class="collection-head">
-            <div class="container">
-                <div class="collection-title">
-                    <h1 class="collection-header">{{ $userInfo->name }}</h1>
-                </div>
-            </div>
+    <div class="jumbotron geopattern" pattern-id="{{ $userInfo->name }}">
+        <div class="container article-banner">
+            <h1 class="jumbotron-title">关于</h1> 
+            <p class="jumbotron-desc">
+                这个有点情怀，但又有些心事的博客。
+            </p>
         </div>
-    </section>
+    </div>
 
-    <section class="container content">
-        <div class="columns">
-            <div class="column three-fourths">
+    <section class="container">
+        <div class="row">
+            <div class="col-sm-8">
                 <article class="article-content markdown-body">
                     {!! conversionMarkdown($userInfo->desc) !!}
                 </article>
@@ -39,10 +38,7 @@
                 </div>
             </div>
 
-            <div class="column one-fourth">
-                <div id="author" class="clearfix">
-                    <img class="img-circle" src="{{ asset('uploads'.'/'.$userInfo->photo) }}" height="96" width="96" alt="{{ $userInfo->name }}" title="{{ $userInfo->name }}">
-                </div>
+            <div class="col-sm-4">
                 @include('themes.default.right')
             </div>
         </div>

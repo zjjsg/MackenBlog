@@ -1,17 +1,17 @@
 @extends('themes.default.layouts')
 
 @section('header')
-    <title>{{ systemConfig('title','') }}</title>
+    <title>{{ systemConfig('title','') }} | {{ systemConfig('subheading', '') }}</title>
     <meta name="keywords" content="{{ systemConfig('seo_key') }}" />
     <meta name="description" content="{{ systemConfig('seo_desc') }}">
 @endsection
 
 @section('content')
 <div class="jumbotron">
-    <div class="container">  
-        <h1>麦肯先生</h1> 
+    <div class="container">
+        <h1>麦肯先生</h1>
         <p>
-            如果不能成为拯救世界的神，那就堕落到征服世界的魔吧！
+            Simplicity is the essence of happiness.
         </p> 
     </div>  
 </div>
