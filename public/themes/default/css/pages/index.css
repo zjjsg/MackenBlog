@@ -1,0 +1,29 @@
+
+.banner .collection-head {
+    padding: 4rem 0;
+    color: #fff;
+    background: 0 0;
+    box-shadow: none;
+    -webkit-box-shadow: none
+}
+
+.banner{
+    background-image:  url('../../images/header.jpg');
+}
+
+
+a:hover{
+    color: #f4645f;
+    text-decoration: none;
+}
+
+
+
+.img-circle {
+    border-radius: 50%;
+}
+#author img {
+    width: 80px;
+    height: 80px;
+    top: 2em;
+}
