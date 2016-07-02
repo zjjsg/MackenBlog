@@ -1,7 +1,7 @@
 <?php namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use Auth, Input, Request, Cache;
+use Auth, Request, Cache;
 
 
 class Article extends Model
@@ -105,7 +105,7 @@ class Article extends Model
     public static function getNewsArticle($limit = 4)
     {
 
-        $page = Input::get('page', 1);
+        $page = Request::get('page', 1);
         $cacheName = $page.'_'.$limit;
         if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_NEW_ARTICLE_CACHE . $cacheName))) {
             $model = self::select('id')->orderBy('id', 'DESC')->paginate($limit);
@@ -131,7 +131,7 @@ class Article extends Model
      */
     public static function getArchivedArticleList($year, $month, $limit = 8)
     {
-        $page = Input::get('page', 1);
+        $page = Request::get('page', 1);
         $cacheName = $year.'_'.$month.'_'.$page.'_'.$limit;
         if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_ARCHIVE_ARTICLE_CACHE . $cacheName))) {
             $model = self::select('id')->where(\DB::raw("DATE_FORMAT(`created_at`, '%Y %c')"), '=', "$year $month")->orderBy('id', 'DESC')->paginate($limit);
@@ -165,7 +165,7 @@ class Article extends Model
      */
     public static function getArticleListByCatId($catId, $limit = 10)
     {
-        $page = Input::get('page', 1);
+        $page = Request::get('page', 1);
 
         $cacheName = $page . '_' . $catId.'_'.$limit;
         if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_CATE_ARTICLE_CACHE . $cacheName))) {
@@ -237,7 +237,7 @@ class Article extends Model
      */
     public static function getArticleListByKeyword($keyword)
     {
-        $page = Input::get('page', 1);
+        $page = Request::get('page', 1);
         $cacheName = $page . '_' . md5($keyword);
 
         if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_SEARCH_ARTICLE_CACHE . $cacheName))) {
@@ -258,7 +258,7 @@ class Article extends Model
     }
     public static function getArticleListByTagId($tagId)
     {
-        $page = Input::get('page', 1);
+        $page = Request::get('page', 1);
         $cacheName = $page. '_' . md5($tagId);
         if (empty($model = Cache::tags(self::REDIS_ARTICLE_PAGE_TAG)->get(self::REDIS_TAG_ARTICLE_CACHE . $cacheName))) {
             $model = self::select('id')->whereRaw(
