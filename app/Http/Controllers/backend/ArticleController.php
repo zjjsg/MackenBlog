@@ -26,7 +26,6 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
         return backendView('index', ['article' => Article::orderBy('id', 'DESC')->paginate(10)]);
     }
 
@@ -37,7 +36,6 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
         $catArr = Category::getCategoryTree();
         unset($catArr[0]);
         return backendView('create', ['catArr' => $catArr]);
@@ -48,22 +46,21 @@ class ArticleController extends Controller
      *
      * @return Response
      */
-    public function store(ArticleForm $result)
+    public function store(ArticleForm $request)
     {
         try {
 
-            $data = array(
-                'title' => $result->input('title'),
+            $data = [
+                'title' => $request->input('title'),
                 'user_id' => Auth::user()->id,
-                'cate_id' => $result->input('cate_id'),
-                'content' => $result->input('content'),
-                'tags' => Tag::SetArticleTags($result->input('tags')),
+                'cate_id' => $request->input('cate_id'),
+                'content' => $request->input('content'),
+                'tags' => Tag::SetArticleTags($request->input('tags')),
                 'pic' => Article::uploadImg('pic'),
-            );
+            ];
 
             if ($article = Article::create($data)) {
                 if (ArticleStatus::initArticleStatus($article->id)) {
-                    // 清除缓存
                     Cache::tags(Article::REDIS_ARTICLE_PAGE_TAG)->flush();
                     Notification::success('恭喜又写一篇文章');
                     return redirect()->route('backend.article.index');
@@ -72,7 +69,7 @@ class ArticleController extends Controller
                 }
             }
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
     }
 

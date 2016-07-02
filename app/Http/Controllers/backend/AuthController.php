@@ -19,13 +19,6 @@ class AuthController extends Controller {
 	*/
 
 	/**
-     * The Guard implementation.
-     *
-     * @var \Illuminate\Contracts\Auth\Guard
-     */
-    protected $auth;
-
-	/**
 	 * Create a new authentication controller instance.
 	 *
 	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
@@ -36,10 +29,10 @@ class AuthController extends Controller {
 	{
 		$this->auth = $auth;
 		$this->loginPath = 'backend/auth/login';
-		$this->redirectPath = url(route('backend.home.index'));
+		$this->redirectPath = url('backend/home');
 		$this->redirectAfterLogout = url('backend/auth/login');
 
-		$this->middleware('guest', ['except' => 'getLogout']);
+		// $this->middleware('guest', ['except' => 'getLogout']);
 	}
 
 	/**
