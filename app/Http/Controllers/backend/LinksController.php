@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\Backend;
 
 use App\Model\Links;
 use Illuminate\Http\Request;

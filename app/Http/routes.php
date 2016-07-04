@@ -20,25 +20,25 @@ Route::resource('article', 'ArticleController');
 Route::resource('category', 'CategoryController');
 
 Route::controllers([
-    'backend/auth' => 'backend\AuthController',
-    'backend/password' => 'backend\PasswordController',
+    'backend/auth' => 'Backend\AuthController',
+    'backend/password' => 'Backend\PasswordController',
     'search'=>'SearchController',
 ]);
 
 Route::group(['prefix'=>'backend','middleware'=>'auth'],function(){
-    Route::any('/','backend\HomeController@index');
-    Route::resource('home', 'backend\HomeController');
-    Route::resource('cate','backend\CateController');
-    Route::resource('content','backend\ContentController');
-    Route::resource('article','backend\ArticleController');
-    Route::resource('tags','backend\TagsController');
-    Route::resource('user','backend\UserController');
-    // Route::resource('comment','backend\CommentController');
-    Route::resource('nav','backend\NavigationController');
-    Route::resource('links','backend\LinksController');
+    Route::any('/','Backend\HomeController@index');
+    Route::resource('home', 'Backend\HomeController');
+    Route::resource('cate','Backend\CateController');
+    Route::resource('content','Backend\ContentController');
+    Route::resource('article','Backend\ArticleController');
+    Route::resource('tags','Backend\TagsController');
+    Route::resource('user','Backend\UserController');
+    // Route::resource('comment','Backend\CommentController');
+    Route::resource('nav','Backend\NavigationController');
+    Route::resource('links','Backend\LinksController');
+    Route::resource('upload', 'Backend\UploadController', ['only' => 'store']);
     Route::controllers([
-        'system'=>'backend\SystemController',
-        'upload'=>'backend\UploadFileController'
+        'system'=>'Backend\SystemController',
     ]);
 
 });

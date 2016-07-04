@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -161,7 +161,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
-        YuanChao\Editor\EndaEditorServiceProvider::class,
         Mews\Captcha\CaptchaServiceProvider::class
     ],
 
@@ -211,7 +210,6 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Notification' => Krucas\Notification\Facades\Notification::class,
-        'EndaEditor' => YuanChao\Editor\Facade\EndaEditorFacade::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class
     ],
 

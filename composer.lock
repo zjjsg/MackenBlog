@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "49165943e9fd297b88a8c1bf13d56d63",
-    "content-hash": "d43439373ae52bba10120268720df113",
+    "hash": "0a5d87b3ef8a1e50a0ecdcee211d61e8",
+    "content-hash": "ebb8466ee86c671ee89d60e46b18c0fd",
     "packages": [
         {
             "name": "caouecs/laravel-lang",
@@ -1233,16 +1233,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.19.0",
+            "version": "1.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf"
+                "reference": "55841909e2bcde01b5318c35f2b74f8ecc86e037"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/Seldaek/monolog/5f56ed5212dc509c8dc8caeba2715732abb32dbf.zip",
-                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf",
+                "url": "https://packagist.phpcomposer.com/files/Seldaek/monolog/55841909e2bcde01b5318c35f2b74f8ecc86e037.zip",
+                "reference": "55841909e2bcde01b5318c35f2b74f8ecc86e037",
                 "shasum": ""
             },
             "require": {
@@ -1261,8 +1261,8 @@
                 "php-console/php-console": "^3.1.3",
                 "phpunit/phpunit": "~4.5",
                 "phpunit/phpunit-mock-objects": "2.3.0",
-                "raven/raven": "^0.13",
                 "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^0.13",
                 "swiftmailer/swiftmailer": "~5.3"
             },
             "suggest": {
@@ -1274,9 +1274,9 @@
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
-                "raven/raven": "Allow sending log messages to a Sentry server",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
             },
             "type": "library",
             "extra": {
@@ -1307,7 +1307,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-04-12 18:29:35"
+            "time": "2016-07-02 14:02:10"
         },
         {
             "name": "mtdowling/cron-expression",
@@ -2633,39 +2633,6 @@
                 "environment"
             ],
             "time": "2016-06-14 14:14:52"
-        },
-        {
-            "name": "yuanchao/laravel-5-markdown-editor",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/yccphp/laravel-5-markdown-editor.git",
-                "reference": "420f93671d19b6edff7bd045ed728704c4e083c2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/yccphp/laravel-5-markdown-editor/420f93671d19b6edff7bd045ed728704c4e083c2.zip",
-                "reference": "420f93671d19b6edff7bd045ed728704c4e083c2",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "YuanChao\\Editor\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "yuanchao",
-                    "email": "653069653@qq.com"
-                }
-            ],
-            "description": "Based on the markdown editor laravel 5",
-            "time": "2016-06-06 03:00:54"
         }
     ],
     "packages-dev": [
@@ -4044,8 +4011,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "edvinaskrucas/notification": 20,
-        "overtrue/laravel-lang": 20,
-        "yuanchao/laravel-5-markdown-editor": 20
+        "overtrue/laravel-lang": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

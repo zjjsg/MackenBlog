@@ -51,16 +51,6 @@
                     <font color="red">{{ $errors->first('photo') }}</font>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
-                <div class="col-sm-3 editor">
-                    @include('editor::head')
-                    {!! Form::textarea('desc', '', ['class' => 'form-control','id'=>'myEditor']) !!}
-                    <font color="red">{{ $errors->first('desc') }}</font>
-                </div>
-            </div>
-
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     {!! Form::submit('创建', ['class' => 'btn btn-success']) !!}

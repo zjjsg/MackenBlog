@@ -5,6 +5,8 @@
 <!-- Tokenfield CSS -->
 <link href="{{ asset('/plugin/tags/css/bootstrap-tokenfield.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('/plugin/tags/css/jquery-ui.css ') }}" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('/bower_components/editor.md/css/editormd.min.css')}}" />
+<script type="text/javascript" src="{{ asset('/bower_components/editor.md/editormd.min.js') }}"></script>
 
         <div class="col-md-10">
             <div class="panel panel-default">
@@ -64,10 +66,9 @@
 
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">内容</label>
-                            <div class="col-sm-3">
-                                <div class="editor">
-                                    @include('editor::head')
-                                    {!! Form::textarea('content', $article->content, ['class' => 'form-control','id'=>'myEditor']) !!}
+                            <div class="col-sm-9">
+                                <div id="editormd">
+                                    {!! Form::textarea('content', $article->content, ['class' => 'form-control']) !!}
                                 </div>
                                 <font color="red">{{ $errors->first('content') }}</font>
                             </div>
@@ -98,5 +99,21 @@
         delimiter: [","],
         tokens: <?php echo  \App\Model\Tag::getTagStringByTagIds($article->tags)?>
     })
+
+    $(function() {
+        var editor = editormd("editormd", {
+            emoji: true,
+            flowChart : true,
+            tex  : true,
+            htmlDecode : true,
+            htmlDecode : "style,script,iframe,sub,sup",
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadToken : '{{ csrf_token() }}',
+            imageUploadURL : "/backend/upload/",
+            height  : 420,
+            path : "{{ asset('bower_components/editor.md/lib') }}/" // Autoload modules mode, codemirror, marked... dependents libs path
+        });
+    });
 </script>
 @endsection

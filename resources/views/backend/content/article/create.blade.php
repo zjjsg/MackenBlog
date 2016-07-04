@@ -7,9 +7,11 @@
 <link href="{{ asset('/plugin/tags/css/bootstrap-tokenfield.css') }}" type="text/css" rel="stylesheet">
 <link href="{{ asset('/plugin/tags/css/jquery-ui.css ') }}" type="text/css" rel="stylesheet">
 
+<link rel="stylesheet" href="{{ asset('/bower_components/editor.md/css/editormd.min.css')}}" />
+
         <div class="col-md-10">
             <div class="panel panel-default">
-                <div class="panel-heading">创建分类</div>
+                <div class="panel-heading">创建文章</div>
 
                 @if ($errors->has('error'))
                 <div class="alert alert-danger alert-dismissible" role="alert">
@@ -61,9 +63,10 @@
 
                         <div class="form-group">
                             <label for="inputPassword3" class="col-sm-2 control-label">内容</label>
-                            <div class="col-sm-7 editor">
-                                @include('editor::head')
-                                {!! Form::textarea('content', '', ['class' => 'form-control','id'=>'myEditor']) !!}
+                            <div class="col-sm-9">
+                            <div id="editormd">
+                                {!! Form::textarea('content', '', ['class' => 'form-control']) !!}
+                            </div>
                                 <font color="red">{{ $errors->first('content') }}</font>
                             </div>
                         </div>
@@ -82,6 +85,7 @@
 
 <script type="text/javascript" src="{{ asset('/plugin/tags/jquery-ui.js ') }}"></script>
 <script type="text/javascript" src="{{ asset('/plugin/tags/bootstrap-tokenfield.js ') }}" charset="UTF-8"></script>
+<script type="text/javascript" src="{{ asset('/bower_components/editor.md/editormd.min.js') }}"></script>
 
 <script type="text/javascript">
     $('#tags').tokenfield({
@@ -92,5 +96,21 @@
         showAutocompleteOnFocus: !0,
         delimiter: [","]
     })
+
+    $(function() {
+        var editor = editormd("editormd", {
+            emoji: true,
+            flowChart : true,
+            tex  : true,
+            htmlDecode : true,
+            htmlDecode : "style,script,iframe,sub,sup",
+            imageUpload : true,
+            imageFormats : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadToken : '{{ csrf_token() }}',
+            imageUploadURL : "{{ url(config('editor.uploadUrl')) }}",
+            height  : 420,
+            path : "{{ asset('bower_components/editor.md/lib') }}/" // Autoload modules mode, codemirror, marked... dependents libs path
+        });
+    });
 </script>
 @endsection

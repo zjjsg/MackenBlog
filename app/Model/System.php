@@ -29,7 +29,7 @@ class System extends Model
      */
     public function getSystem($field)
     {
-        return self::select('system_value')->where('system_name', $field)->pluck('system_value');
+        return self::select('system_value')->where('system_name', $field)->pluck('system_value')[0];
     }
 
 }

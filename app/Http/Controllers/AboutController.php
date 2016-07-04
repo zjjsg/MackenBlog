@@ -18,17 +18,13 @@ class AboutController extends CommonController {
 	 */
 	public function show()
 	{
-		//
 
         $userInfo = User::getUserInfoModelByUserId(1);
         if(empty($userInfo)){
             return redirect('/');
         }
         $userArticle = Article::getArticleModelByUserId(1);
-        return homeView('about',[
-            'userInfo'=>$userInfo,
-            'userArticle'=>$userArticle
-        ]);
+        return view('themes.default.about', compact('userInfo', 'userArticle'));
 	}
 
 }
