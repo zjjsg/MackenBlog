@@ -12,5 +12,12 @@ var elixir = require('laravel-elixir');
  */
 
 elixir(function(mix) {
+
     mix.sass('app.scss');
+
+    mix.scripts([
+    	'bootstrap-sass/assets/javascripts/bootstrap.min.js',
+    	'social-share.js/dist/js/jquery.share.min.js',
+    	'geopattern/geopattern.js',
+    	], null, 'node_modules');
 });

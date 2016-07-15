@@ -1,7 +1,7 @@
-@extends('backend.user.common')
+@extends('backend.app')
 
 @section('content')
-<div class="col-md-10">
+
     <div class="panel panel-default">
         <div class="panel-heading">修改用户</div>
 
@@ -59,15 +59,6 @@
             </div>
 
             <div class="form-group">
-                <label  class="col-sm-2 control-label">描述</label>
-                <div class="col-sm-5 editor">
-                    @include('editor::head')
-                    {!! Form::textarea('desc', $user->desc, ['class' => 'form-control','id'=>'myEditor']) !!}
-                    <font color="red">{{ $errors->first('desc') }}</font>
-                </div>
-            </div>
-
-            <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     {!! Form::submit('修改', ['class' => 'btn btn-success']) !!}
                 </div>
@@ -75,5 +66,5 @@
             {!! Form::close() !!}
         </div>
     </div>
-</div>
+
 @endsection

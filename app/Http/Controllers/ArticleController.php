@@ -3,10 +3,12 @@
 use Illuminate\Pagination\BootstrapThreePresenter;
 use App\Http\Controllers\Controller;
 
-use App\Model\ArticleStatus;
-use App\Model\Article;
+use App\Models\ArticleStatus;
+use App\Models\Article;
 
-class ArticleController extends CommonController
+use Parsedown;
+
+class ArticleController extends Controller
 {
 
     /**
@@ -16,9 +18,14 @@ class ArticleController extends CommonController
      */
     public function index()
     {
-        $articleList = Article::getNewsArticle(8);
-        $page = new BootstrapThreePresenter($articleList['page']);
-        return homeView('index', compact('articleList', 'page'));
+        $articles = Article::getLatestArticleList(8);
+        $page = new BootstrapThreePresenter($articles);
+
+        $jumbotron = [];
+        $jumbotron['title'] = '麦肯先生';
+        $jumbotron['desc'] = 'Simplicity is the essence of happiness.';
+
+        return view('pages.list', compact('articles', 'page', 'jumbotron'));
     }
 
 
@@ -30,24 +37,27 @@ class ArticleController extends CommonController
      */
     public function show($id)
     {
-        $article = Article::getArticleModelByArticleId($id);
-
-        ArticleStatus::updateViewNumber($id);
-        return homeView('article', ['article' => $article]);
+        $article = Article::getArticleModel($id);
+        ArticleStatus::updateViewNumber($article->id);
+        return view('pages.show', compact('article'));
     }
 
     /**
-     * display the archived articles by month
+     * display the articles archived by month
      * @param  [type] $year  [description]
      * @param  [type] $month [description]
      * @return [type]        [description]
      */
     public function archive($year, $month)
     {
-        $archiveTitle = '归档：'.$year.'年 '.$month.'月';
-        $articleList = Article::getArchivedArticleList($year, $month, 8);
-        $page = new BootstrapThreePresenter($articleList['page']);
-        return homeView('archive', compact('articleList', 'page', 'archiveTitle'));
+        $articles = Article::getArchivedArticleList($year, $month, 8);
+        $page = new BootstrapThreePresenter($articles);
+
+        $jumbotron = [];
+        $jumbotron['title'] = '归档：'.$year.'年 '.$month.'月';
+        $jumbotron['desc'] = '陈列在时光里的记忆，拂去轻尘，依旧如新。';
+
+        return view('pages.list', compact('articles', 'page', 'jumbotron'));
     }
 
 }

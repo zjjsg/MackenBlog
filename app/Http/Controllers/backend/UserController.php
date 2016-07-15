@@ -5,7 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Services\Registrar;
-use App\User;
+use App\Models\User;
 use Notification;
 use Validator;
 use URL;
@@ -16,7 +16,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        conversionClassPath(__CLASS__);
+
     }
 
     /**
@@ -26,8 +26,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-        return backendView('index', array('users' => User::orderBy('id', 'DESC')->paginate(10)));
+        return view('backend.user.index', ['users' => User::orderBy('id', 'desc')->paginate(10)]);
     }
 
     /**
@@ -37,8 +36,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
-        return backendView('create');
+        return view('backend.user.create');
     }
 
     /**
@@ -81,10 +79,9 @@ class UserController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
-        return backendView('edit', array('user' => User::find($id)));
+        return view('backend.user.edit', ['user' => $user]);
     }
 
     /**
@@ -111,7 +108,7 @@ class UserController extends Controller
             }
 
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
+            return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
 
         return redirect()->route('backend.user.index');

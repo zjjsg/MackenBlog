@@ -1,0 +1,23 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/RystLee/MackenBlog",
+  "authors": [
+    "lyk <rystlee100@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "editor.md": "^1.5.0",
+    "select2": "^4.0.3",
+    "jquery": "1.9.1",
+    "primer-markdown": "^3.2.0"
+  }
+}

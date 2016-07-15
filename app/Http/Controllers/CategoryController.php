@@ -1,35 +1,37 @@
-<?php namespace App\Http\Controllers;
+<?php 
+
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Model\Article;
-use App\Model\Category;
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\BootstrapThreePresenter;
 
-class CategoryController extends CommonController
+class CategoryController extends Controller
 {
-
     /**
-     * Display the specified resource.
+     * display the articles of the given category
      *
      * @param  int $id
      * @return Response
      */
     public function show($id)
     {
-        $category = Category::getCatInfoModelByAsName($id);
+        $category = Category::getCategoryModel($id);
         if (empty($category)) {
             return redirect(url(route('article.index')));
         }
-        $articleList = Article::getArticleListByCatId($category->id, 10);
-        $page = new BootstrapThreePresenter($articleList['page']);
-        return homeView('category', [
-            'category' => $category,
-            'articleList' => $articleList,
-            'page' => $page
-        ]);
-    }
 
+        $articles = $category->articles()->latest()->paginate(8);
+        $page = new BootstrapThreePresenter($articles);
+
+        $jumbotron = [];
+        $jumbotron['title'] = '分类：'.$category->name;
+        $jumbotron['desc'] = $category->seo_desc;
+
+        return view('pages.list', compact('category', 'articles', 'page', 'jumbotron'));
+    }
 }

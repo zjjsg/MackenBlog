@@ -1,4 +1,4 @@
-@extends('backend.user.common')
+@extends('backend.app')
 
 @section('content')
         <div class="col-md-10">
@@ -45,7 +45,7 @@
                                     'class'=>'btn_form'
                                 ]) !!}
 
-                                <button type="submit" class="btn btn-info">
+                                <button type="submit" class="btn btn-primary">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     修改
                                 </button>

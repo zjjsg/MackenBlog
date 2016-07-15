@@ -1,22 +1,23 @@
-<?php namespace App\Http\Controllers\Backend;
+<?php
+
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-
 use Input, Notification, Auth, Request, Cache;
-use App\Model\Article;
-use App\Model\Category;
-use App\Model\ArticleStatus;
-use App\Http\Requests\ArticleForm;
-use App\Model\Tag;
+use App\Models\Article;
+use App\Models\Category;
+use App\Models\ArticleStatus;
+use App\Http\Requests\ArticleRequest;
+use App\Models\Tag;
 
 class ArticleController extends Controller
 {
 
     public function __construct()
     {
-        conversionClassPath(__CLASS__);
+
     }
 
     /**
@@ -26,7 +27,8 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return backendView('index', ['article' => Article::orderBy('id', 'DESC')->paginate(10)]);
+        $articles = Article::latest()->paginate(10);
+        return view('backend.article.index', compact('articles'));
     }
 
     /**
@@ -36,9 +38,10 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $catArr = Category::getCategoryTree();
-        unset($catArr[0]);
-        return backendView('create', ['catArr' => $catArr]);
+        $categoryTree = Category::getCategoryTree();
+        $categoryTree[0] = '单页';
+        $tags = Tag::lists('name', 'id');
+        return view('backend.article.create', compact('categoryTree', 'tags'));
     }
 
     /**
@@ -46,28 +49,29 @@ class ArticleController extends Controller
      *
      * @return Response
      */
-    public function store(ArticleForm $request)
+    public function store(ArticleRequest $request)
     {
         try {
 
-            $data = [
-                'title' => $request->input('title'),
-                'user_id' => Auth::user()->id,
-                'cate_id' => $request->input('cate_id'),
-                'content' => $request->input('content'),
-                'tags' => Tag::SetArticleTags($request->input('tags')),
-                'pic' => Article::uploadImg('pic'),
-            ];
+            $pic = upload_file('pic', $request);
+            !$pic && Notification::error('文章配图上传失败');
 
-            if ($article = Article::create($data)) {
-                if (ArticleStatus::initArticleStatus($article->id)) {
-                    Cache::tags(Article::REDIS_ARTICLE_PAGE_TAG)->flush();
-                    Notification::success('恭喜又写一篇文章');
-                    return redirect()->route('backend.article.index');
-                } else {
-                    self::destroy($article->id);
-                }
+            $request->pic = $pic;
+            $article = Auth::user()->articles()->create($request->all());
+
+            if ($request->has('tag_list')) {
+                $this->syncTags($article, $request->input('tag_list'));
             }
+
+            if (ArticleStatus::initArticleStatus($article->id)) {
+                Notification::success('文章发表成功');
+                return redirect()->route('backend.article.index');
+            } else {
+                self::destroy($article->id);
+            }
+
+            return $article;
+            
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['error' => $e->getMessage()])->withInput();
         }
@@ -90,12 +94,12 @@ class ArticleController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
-        $catArr = Category::getCategoryTree();
-        unset($catArr[0]);
-        return backendView('edit', ['article' => Article::find($id), 'catArr' => $catArr]);
+        $tags = Tag::lists('name', 'id');
+        $categoryTree = Category::getCategoryTree();
+        $categoryTree[0] = '单页';
+        return view('backend.article.edit', compact('article', 'categoryTree', 'tags'));
     }
 
     /**
@@ -104,28 +108,19 @@ class ArticleController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(ArticleForm $result, $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
         try {
 
-            $data = array(
-                'title' => $result->input('title'),
-                'user_id' => Auth::user()->id,
-                'cate_id' => $result->input('cate_id'),
-                'content' => $result->input('content'),
-                'tags' => Tag::SetArticleTags($result->input('tags')),
-            );
-
             if (Request::hasFile('pic')) {
-                $data['pic'] = Article::uploadImg('pic');
+                $pic = upload_file('pic', $request);
+                !$pic && Notification::error('文章配图上传失败');
+                $request->pic = $pic;
             }
 
-            if (Article::where('id', $id)->update($data)) {
+            if ($article->update($request->all())) {
+                $this->syncTags($article, $request->input('tag_list'));
                 Notification::success('更新成功');
-                // 清除缓存
-                Cache::tags(Article::REDIS_ARTICLE_PAGE_TAG)->flush();
-                Cache::forget(Article::REDIS_ARTICLE_CACHE.$id);
 
                 return redirect()->route('backend.article.index');
             }
@@ -156,8 +151,7 @@ class ArticleController extends Controller
 
             if (Article::destroy($id)) {
                 Notification::success('删除成功');
-                Cache::tags(Article::REDIS_ARTICLE_PAGE_TAG)->flush();
-                Cache::forget(Article::REDIS_ARTICLE_CACHE.$id);
+    
             } else {
                 Notification::error('主数据删除失败');
             }
@@ -167,6 +161,22 @@ class ArticleController extends Controller
         }
 
         return redirect()->route('backend.article.index');
+    }
+
+    private function syncTags(Article $article, array $tags) 
+    {
+        #extract the input into separate numeric and string arrays
+        $currentTags = array_filter($tags, 'is_numeric'); # ["1", "3", "5"]
+        $newTags = array_diff($tags, $currentTags); # ["awesome", "cool"]
+
+        #Create a new tag for each string in the input and update the current tags array
+        foreach ($newTags as $newTag)
+        {
+          if ($tag = Tag::firstOrCreate(['name' => $newTag]))
+            $currentTags[] = $tag->id;
+        }
+
+        $article->tags()->sync($currentTags); 
     }
 
 }

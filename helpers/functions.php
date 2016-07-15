@@ -1,29 +1,5 @@
 <?php
 
-if (!function_exists('backendView')) {
-    /**
-     * 展示后台view
-     
-     * @param  string $view
-     * @param  array $data
-     * @param  array $mergeData
-     * @return \Illuminate\View\View
-     */
-    function backendView($view = null, $data = array(), $mergeData = array())
-    {
-        $factory = app('Illuminate\Contracts\View\Factory');
-        if (func_num_args() === 0) {
-            return $factory;
-        }
-        $BaseviewPath = Config::get('path.backendBaseViewPath');
-        $module = Config::get('path.class');
-        if (!empty($module)) {
-            $BaseviewPath .= Config::get('path.modules.' . $module);
-            Config::set('path.class', '');
-        }
-        return $factory->make($BaseviewPath . $view, $data, $mergeData);
-    }
-}
 if (!function_exists('conversionClassPath')) {
     /**
      * 转换class 名
@@ -105,39 +81,15 @@ if (!function_exists('strCut')) {
     }
 }
 
-if (!function_exists('viewInit')) {
-    /**
-     * 字符串截取
-     * @param string $string
-     * @param integer $length
-     * @param string $suffix
-     * @return string
-     */
-    function viewInit()
-    {
-        // $article = app('App\Model\Article');
-        // $tags = app('App\Model\Tag');
-        // $view = app('view');
-        // $nav = app('App\Model\Navigation');
-        // $links = app('App\Model\Links');
-
-
-        // $view->share('hotArticleList', $article::getHotArticle(3));
-        // $view->share('tagList', $tags::getHotTags(12));
-        // $view->share('navList', $nav::getNavigationAll());
-        // $view->share('linkList', $links::getLinkList());
-    }
-}
-
 if (!function_exists('conversionMarkdown')) {
     /**
      * @param $markdownContent
      * @return string
      */
-    function conversionMarkdown($markdownContent)
+    function convertMarkdown($markdownContent)
     {
-        $endaEditor = app('YuanChao\Editor\Facade\EndaEditorFacade');
-        return !empty($markdownContent) ? $endaEditor::MarkDecode($markdownContent) : '';
+        $parser = new Parsedown;
+        return !empty($markdownContent) ? $parser->text($markdownContent) : '';
     }
 }
 
@@ -204,8 +156,8 @@ if (!function_exists('tree')) {
 if (!function_exists('systemConfig')) {
     function systemConfig($field, $default = '')
     {
-        $system = app('App\Model\System');
-        $val = $system->getSystem($field);
+        $system = app('App\Models\Setting');
+        $val = $system->getSetting($field);
         return !empty($val) ? $val : $default;
     }
 }
@@ -218,5 +170,27 @@ if (!function_exists('getArticleImg')) {
             $imageUrl = 'uploads' . '/' . $image;
         }
         return asset($imageUrl);
+    }
+}
+
+if (!function_exists('upload_file')) {
+    /**
+     * upload file
+     * @param  [type] $fileInput file input's names
+     * @return mixed            [description]
+     */
+    function upload_file($fileInput, $request)
+    {
+        if ($request->hasFile($fileInput)) {
+            $file = $request->file($fileInput);
+
+            $fileName = (string)round((microtime(true) * 1000)) . '.' . $file->getClientOriginalExtension();
+            $uploadPath = public_path('uploads'). '/' . date('Y-m');
+            \File::mkdir($uploadPath);
+            $file->move($uploadPath, $fileName);
+
+            return '/uploads/' . date('Y-m') . '/' . $fileName;
+        }
+        return false;
     }
 }

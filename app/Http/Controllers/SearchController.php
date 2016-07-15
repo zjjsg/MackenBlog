@@ -4,41 +4,27 @@ use Illuminate\Pagination\BootstrapThreePresenter;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Model\Article;
-use App\Model\Tag;
+use App\Models\Article;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-class SearchController extends CommonController
+class SearchController extends Controller
 {
 
-    public function getKeyword(Request $request)
+    public function show($keyword)
     {
-        $keyword = $request->input('keyword');
         if (empty($keyword)) {
             return redirect()->route('article.index');
         }
-        $article = Article::getArticleListByKeyword($keyword);
+        $articles = Article::getArticleListByKeyword($keyword);
+        $page = new BootstrapThreePresenter($articles);
 
-        $page = new BootstrapThreePresenter($article['page']);
-        return homeView('search', [
-            'articleList' => $article,
-            'keyword' => $keyword,
-            'page' => $page
-        ]);
+        $jumbotron = [];
+        $jumbotron['title'] = '关键词：' . $keyword;
+        $jumbotron['desc'] = '';
 
-    }
-
-    public function getTag($id)
-    {
-
-        $article = Article::getArticleListByTagId($id);
-        $page = new BootstrapThreePresenter($article['page']);
-        return homeView('searchTag', [
-            'articleList' => $article,
-            'tagName' => Tag::getTagNameByTagId($id),
-            'page' => $page
-        ]);
+        return view('pages.list', compact('keyword', 'articles', 'page', 'jumbotron'));
     }
 
 }

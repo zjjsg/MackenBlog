@@ -1,13 +1,15 @@
-<?php namespace App\Http\Controllers;
+<?php 
+
+namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Model\Article;
+use App\Models\Article;
 use App\User;
 use Illuminate\Http\Request;
 
-class AboutController extends CommonController {
+class AboutController extends Controller {
 
 
 	/**

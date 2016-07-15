@@ -1,8 +1,5 @@
 <?php
-/**
- * User: 袁超<yccphp@163.com>
- * Time: 2015.04.06 下午4:52
- */
+
 return [
     'title' => '标题',
     'subheading' => '副标题',
