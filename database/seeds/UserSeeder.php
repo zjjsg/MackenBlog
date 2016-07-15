@@ -11,7 +11,6 @@ class UserSeeder extends Seeder{
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' =>'123456',
-            'desc'=>'管理员'
         ];
         $register = new Registrar();
         $register->create($data);

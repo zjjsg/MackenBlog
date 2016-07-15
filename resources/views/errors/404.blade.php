@@ -1,4 +1,4 @@
-@extends('themes.keylime.main')
+@extends('app')
 
 @section('header')
     <title>404_{{ systemConfig('title','Enda Blog') }}-Powered By{{ systemConfig('subheading','Enda Blog') }}</title>
@@ -21,8 +21,7 @@
 <div class="container content">
     <div class="post-popular">
         <div class="row hidden-xs">
-            {{ viewInit() }}
-            <?php $hotArticle = App\Model\Article::getHotArticle(3)?>
+            <?php $hotArticle = App\Models\Article::getHotArticleList(3)?>
             @if(!empty($hotArticle))
                 @foreach($hotArticle as $key=>$article)
                     <div class="col-sm-4 col-md-4">

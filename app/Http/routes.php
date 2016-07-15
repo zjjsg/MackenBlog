@@ -12,33 +12,32 @@
 */
 
 Route::get('/', 'ArticleController@index');
-Route::get('archive/{year}/{month}', ['as' => 'article-archive-list', 'uses' => 'ArticleController@archive']);
-Route::get('about', 'AboutController@show');
+
+Route::get('category/{category}', 'CategoryController@show');
+Route::get('tag/{tag}', 'TagController@show');
+Route::get('search/{keyword}', 'SearchController@show');
 
 Route::resource('article', 'ArticleController');
-// Route::resource('comment', 'CommentController');
-Route::resource('category', 'CategoryController');
+Route::get('about', 'ArticleController@show');
+Route::get('archive/{year}/{month}', ['as' => 'article-archive-list', 'uses' => 'ArticleController@archive']);
 
 Route::controllers([
     'backend/auth' => 'Backend\AuthController',
-    'backend/password' => 'Backend\PasswordController',
-    'search'=>'SearchController',
+    'backend/password' => 'Backend\PasswordController'
 ]);
 
-Route::group(['prefix'=>'backend','middleware'=>'auth'],function(){
-    Route::any('/','Backend\HomeController@index');
-    Route::resource('home', 'Backend\HomeController');
-    Route::resource('cate','Backend\CateController');
-    Route::resource('content','Backend\ContentController');
-    Route::resource('article','Backend\ArticleController');
-    Route::resource('tags','Backend\TagsController');
-    Route::resource('user','Backend\UserController');
-    // Route::resource('comment','Backend\CommentController');
-    Route::resource('nav','Backend\NavigationController');
-    Route::resource('links','Backend\LinksController');
-    Route::resource('upload', 'Backend\UploadController', ['only' => 'store']);
+Route::group(['prefix'=>'backend', 'namespace'=>'Backend', 'middleware'=>'auth'],function(){
+    Route::any('/','HomeController@index');
+    Route::resource('home', 'HomeController');
+    Route::resource('category','CategoryController');
+    Route::resource('article','ArticleController');
+    Route::resource('tag','TagController');
+    Route::get('api/tags', ['uses'=>'TagController@getTags']);
+    Route::resource('user','UserController');
+    Route::resource('navigation','NavigationController');
+    Route::resource('link','LinkController');
+    Route::resource('upload', 'UploadController', ['only' => 'store']);
     Route::controllers([
-        'system'=>'Backend\SystemController',
+        'setting'=>'SettingController',
     ]);
-
 });

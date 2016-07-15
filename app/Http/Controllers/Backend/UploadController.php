@@ -16,16 +16,10 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('editormd-image-file')) {
-            $file = $request->file('editormd-image-file');
-
-            $fileName = (string)round((microtime(true) * 1000)) . '.' . $file->getClientOriginalExtension();
-
-            $file->move(public_path('uploads'), $fileName);
-
-            exit(json_encode(['success' => 1, 'url' => '/uploads/' . $fileName]));
+        $result = upload_file('editormd-image-file');
+        if ($result) {
+            response()->json(['success' => 1, 'url' => $result]);
         }
-
         return response()->json(['success' => 0]);
     }
 }

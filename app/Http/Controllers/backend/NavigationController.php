@@ -3,9 +3,9 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Model\Navigation;
+use App\Models\Navigation;
 use Illuminate\Http\Request;
-use App\Http\Requests\NavigationForm;
+use App\Http\Requests\NavigationRequest;
 use Notification;
 
 class NavigationController extends Controller
@@ -23,10 +23,8 @@ class NavigationController extends Controller
      */
     public function index()
     {
-
-        return backendView('index', [
-            'list' => Navigation::getNavigationAll(),
-        ]);
+        $list = Navigation::getNavigationAll();
+        return view('backend.navigation.index', compact('list'));
     }
 
     /**
@@ -36,8 +34,7 @@ class NavigationController extends Controller
      */
     public function create()
     {
-        //
-        return backendView('create');
+        return view('backend.navigation.create');
     }
 
     /**
@@ -45,13 +42,13 @@ class NavigationController extends Controller
      *
      * @return Response
      */
-    public function store(NavigationForm $request)
+    public function store(NavigationRequest $request)
     {
 
         try {
             if (Navigation::create($request->all())) {
                 Notification::success('添加成功');
-                return redirect()->route('backend.nav.index');
+                return redirect()->route('backend.navigation.index');
             }
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
@@ -78,8 +75,8 @@ class NavigationController extends Controller
      */
     public function edit($id)
     {
-        return backendView('edit', [
-            'nav' => Navigation::find($id),
+        return view('backend.navigation.edit', [
+            'navigation' => Navigation::find($id),
         ]);
     }
 
@@ -89,14 +86,14 @@ class NavigationController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function update(NavigationForm $request, $id)
+    public function update(NavigationRequest $request, $id)
     {
 
         try {
             if (Navigation::find($id)->update($request->all())) {
                 Notification::success('修改成功');
             }
-            return redirect()->route('backend.nav.index');
+            return redirect()->route('backend.navigation.index');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(array('error' => $e->getMessage()))->withInput();
         }
@@ -120,7 +117,7 @@ class NavigationController extends Controller
         }
 
 
-        return redirect()->route('backend.nav.index');
+        return redirect()->route('backend.navigation.index');
     }
 
 }

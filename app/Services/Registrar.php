@@ -1,6 +1,6 @@
 <?php namespace App\Services;
 
-use App\User;
+use App\Models\User;
 use Validator;
 use Illuminate\Contracts\Auth\Registrar as RegistrarContract;
 
@@ -34,7 +34,6 @@ class Registrar implements RegistrarContract {
 			'email' => $data['email'],
 			'password' => bcrypt($data['password']),
             'photo'=>uploadFile('img','photo','uploads'),
-            'desc'=>$data['desc']
 		]);
 	}
 

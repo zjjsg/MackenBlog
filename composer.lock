@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0a5d87b3ef8a1e50a0ecdcee211d61e8",
-    "content-hash": "ebb8466ee86c671ee89d60e46b18c0fd",
+    "hash": "48af7c76910264a399267c7465f2f8e2",
+    "content-hash": "0d9086559e92208a2d96d46d974eb07e",
     "packages": [
         {
             "name": "caouecs/laravel-lang",
-            "version": "3.0.7",
+            "version": "3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caouecs/Laravel-lang.git",
-                "reference": "3924ed74122cb59eb1fe59487511f01293c4d649"
+                "reference": "73b0378492a7f49a998b44548a4454826d7d384c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/caouecs/Laravel-lang/3924ed74122cb59eb1fe59487511f01293c4d649.zip",
-                "reference": "3924ed74122cb59eb1fe59487511f01293c4d649",
+                "url": "https://packagist.phpcomposer.com/files/caouecs/Laravel-lang/73b0378492a7f49a998b44548a4454826d7d384c.zip",
+                "reference": "73b0378492a7f49a998b44548a4454826d7d384c",
                 "shasum": ""
             },
             "require-dev": {
@@ -45,7 +45,7 @@
                 "laravel",
                 "lpm"
             ],
-            "time": "2016-06-29 18:59:08"
+            "time": "2016-07-04 22:13:05"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -642,6 +642,48 @@
                 "notifications"
             ],
             "time": "2015-02-23 22:32:35"
+        },
+        {
+            "name": "erusev/parsedown",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/erusev/parsedown.git",
+                "reference": "490a8f35a4163f59230f53c34f1fbb22a864c01e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/erusev/parsedown/490a8f35a4163f59230f53c34f1fbb22a864c01e.zip",
+                "reference": "490a8f35a4163f59230f53c34f1fbb22a864c01e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Parsedown": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emanuil Rusev",
+                    "email": "hello@erusev.com",
+                    "homepage": "http://erusev.com"
+                }
+            ],
+            "description": "Parser for Markdown.",
+            "homepage": "http://parsedown.org",
+            "keywords": [
+                "markdown",
+                "parser"
+            ],
+            "time": "2016-03-09 17:02:39"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -1754,23 +1796,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/d8db871a54619458a805229a057ea2af33c753e8.zip",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
+                "url": "https://packagist.phpcomposer.com/files/swiftmailer/swiftmailer/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153.zip",
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
@@ -1803,7 +1845,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:45:47"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "symfony/console",
@@ -4011,7 +4053,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "edvinaskrucas/notification": 20,
-        "overtrue/laravel-lang": 20
+        "overtrue/laravel-lang": 20,
+        "erusev/parsedown": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
