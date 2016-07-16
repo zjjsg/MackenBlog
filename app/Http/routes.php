@@ -22,8 +22,8 @@ Route::get('about', 'ArticleController@show');
 Route::get('archive/{year}/{month}', ['as' => 'article-archive-list', 'uses' => 'ArticleController@archive']);
 
 Route::controllers([
-    'backend/auth' => 'Backend\AuthController',
-    'backend/password' => 'Backend\PasswordController'
+    'backend/auth' => 'Auth\AuthController',
+    'backend/password' => 'Auth\PasswordController'
 ]);
 
 Route::group(['prefix'=>'backend', 'namespace'=>'Backend', 'middleware'=>'auth'],function(){
