@@ -10,7 +10,6 @@
         "laravelcollective/html": "5.2.*",
         "edvinaskrucas/notification": "dev-features/laravel-5",
         "overtrue/laravel-lang": "dev-master",
-        "mews/captcha": "~2.0",
         "doctrine/dbal" : "2.4.*",
         "predis/predis":"~1.0",
         "erusev/parsedown": "dev-master"
