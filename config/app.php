@@ -162,7 +162,6 @@ return [
         App\Providers\ViewComposerServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Krucas\Notification\NotificationServiceProvider::class,
-        Mews\Captcha\CaptchaServiceProvider::class
     ],
 
     /*
