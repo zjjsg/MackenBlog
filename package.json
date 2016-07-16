@@ -1,4 +1,10 @@
 {
+  "author": "RystLee",
+  "name": "MackenBlog",
+  "version": "0.8.0",
+  "repository": {
+          "url": ""
+	    },
   "private": true,
   "scripts": {
     "prod": "gulp --production",
