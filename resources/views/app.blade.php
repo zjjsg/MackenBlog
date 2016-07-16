@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     @yield('header')
 
-    <link rel="stylesheet" href="{{ homeAsset('/vendor/octicons/octicons/octicons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mini-repo-list.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-reset.css') }}">

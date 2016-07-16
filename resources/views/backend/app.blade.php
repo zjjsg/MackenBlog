@@ -8,7 +8,7 @@
 
 	<link href="{{ asset('css/bootstrap-paper.min.css') }}" rel="stylesheet">
 
-    <script type="text/javascript" src="{{ asset('/plugin/jquery-1.9.1.js ') }}"></script>
+    <script src="{{ asset('bower_components/jquery/jquery.min.js') }}"></script>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
