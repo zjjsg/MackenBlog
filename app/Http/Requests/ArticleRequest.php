@@ -14,7 +14,8 @@ class ArticleRequest extends BackendRequest
             'category_id' => 'required',
             'title' => 'required',
             'slug' => 'required|regex:/^[a-z0-9\-]+$/',
-            'content' => 'required'
+            'content' => 'required',
+            'tag_list' => 'required',
         ];
 
     }

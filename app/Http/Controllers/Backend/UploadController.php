@@ -16,9 +16,9 @@ class UploadController extends Controller
      */
     public function store(Request $request)
     {
-        $result = upload_file('editormd-image-file');
+        $result = upload_file('editormd-image-file', $request);
         if ($result) {
-            response()->json(['success' => 1, 'url' => $result]);
+            return response()->json(['success' => 1, 'url' => $result]);
         }
         return response()->json(['success' => 0]);
     }

@@ -186,7 +186,7 @@ if (!function_exists('upload_file')) {
 
             $fileName = (string)round((microtime(true) * 1000)) . '.' . $file->getClientOriginalExtension();
             $uploadPath = public_path('uploads'). '/' . date('Y-m');
-            \File::mkdir($uploadPath);
+            !\File::exists($uploadPath) && \File::makeDirectory($uploadPath, 0755, true);
             $file->move($uploadPath, $fileName);
 
             return '/uploads/' . date('Y-m') . '/' . $fileName;
