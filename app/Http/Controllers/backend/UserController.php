@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Backend;
+<?php
+
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -103,7 +105,7 @@ class UserController extends Controller
         }
         try {
 
-            if (User::updateUserInfo($id, $request->all())) {
+            if (User::updateUserInfo($id, $request)) {
                 Notification::success('修改成功');
             }
 

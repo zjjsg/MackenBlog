@@ -3,8 +3,8 @@
   "name": "MackenBlog",
   "version": "0.8.0",
   "repository": {
-          "url": ""
-	    },
+    "url": ""
+  },
   "private": true,
   "scripts": {
     "prod": "gulp --production",
@@ -19,7 +19,6 @@
     "bootstrap-sass": "^3.3.6",
     "bootswatch": "^3.3.6",
     "font-awesome": "^4.6.3",
-    "geopattern": "^1.2.3",
     "primer-markdown": "^3.2.0",
     "social-share.js": "^1.0.15"
   }

@@ -58,26 +58,23 @@ class User extends Authenticatable
     /**
      * 更新用户
      * @param $id
-     * @param $data
+     * @param $request
      * @return bool
      */
-    public static function updateUserInfo($id,$data){
+    public static function updateUserInfo($id,$request){
 
-        if(!empty($id) && !empty($data)){
-
+        if(!empty($id) && !empty($request)){
 
             $user = self::find($id);
-            $user->name = $data['name'];
-            $user->email = $data['email'];
-            if(!empty($data['password'])){
-                $user->password = bcrypt($data['password']);
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            if(!empty($request->input('password'))) {
+                $user->password = bcrypt($request->input('password'));
             }
-            $photo = uploadFile('img','photo','uploads');
+            $photo = upload_file('photo', $request);
             if(!empty($photo)){
                 $user->photo = $photo;
             }
-
-            $user->desc = $data['desc'];
 
             return $user->save();
         }

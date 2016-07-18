@@ -1,9 +1,9 @@
 @extends('app')
 
 @section('header')
-    <title>404_{{ systemConfig('title','Enda Blog') }}-Powered By{{ systemConfig('subheading','Enda Blog') }}</title>
-    <meta name="keywords" content="{{ systemConfig('seo_key') }}" />
-    <meta name="description" content="{{ systemConfig('seo_desc') }}">
+    <title>404_{{ setting_config('title','Enda Blog') }}-Powered By{{ setting_config('subheading','Enda Blog') }}</title>
+    <meta name="keywords" content="{{ setting_config('seo_key') }}" />
+    <meta name="description" content="{{ setting_config('seo_desc') }}">
 @endsection
 
 @section('content')
@@ -13,7 +13,7 @@
         <div class="middle-text">
             <h1>哎呀，访问的页面去冥王星旅游去了</h1>
             <h2>先去看看其它的吧</h2>
-            <a class="btn" href="{{ url('/') }}" title="{{ systemConfig('title','Enda Blog') }}">返回首页</a><br>
+            <a class="btn" href="{{ url('/') }}" title="{{ setting_config('title','Enda Blog') }}">返回首页</a><br>
         </div>
     </div>
 </section>

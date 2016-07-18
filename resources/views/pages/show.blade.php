@@ -1,9 +1,9 @@
 @extends('pages.base')
 
 @section('header')
-    <title>{{ $article->title }} - {{ systemConfig('title','') }}</title>
-    <meta name="keywords" content="{{ $article->title }},{{ systemConfig('seo_key') }}" />
-    <meta name="description" content="{!! str_limit(preg_replace('/\s/', '',strip_tags(convertMarkdown($article->content))),100) !!},{{ systemConfig('seo_desc') }}">
+    <title>{{ $article->title }} - {{ setting_config('title','') }}</title>
+    <meta name="keywords" content="{{ $article->title }},{{ setting_config('seo_key') }}" />
+    <meta name="description" content="{!! str_limit(preg_replace('/\s/', '',strip_tags(convert_markdown($article->content))),100) !!},{{ setting_config('seo_desc') }}">
 @endsection
 
 @section('styles')
@@ -15,7 +15,7 @@
 @endsection
 
 @section('jumbotron-desc')
-    {{ strCut(convertMarkdown($article->content),40) }}
+    {{ str_cut(convert_markdown($article->content),40) }}
 @endsection
 
 @section('jumbotron-meta')
@@ -30,7 +30,7 @@
   
 @section('left')
                 <article class="article-content markdown-body">
-                    {!! convertMarkdown($article->content) !!}
+                    {!! convert_markdown($article->content) !!}
                 </article>
                 <div class="share">
                     <div class="share-bar"></div>
