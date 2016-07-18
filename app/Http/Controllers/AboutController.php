@@ -20,13 +20,9 @@ class AboutController extends Controller {
 	 */
 	public function show()
 	{
-
-        $userInfo = User::getUserInfoModelByUserId(1);
-        if(empty($userInfo)){
-            return redirect('/');
-        }
-        $userArticle = Article::getArticleModelByUserId(1);
-        return view('themes.default.about', compact('userInfo', 'userArticle'));
+        $article = Article::getArticleModel('about');
+        ArticleStatus::updateViewNumber($article->id);
+        return view('pages.show', compact('article'));
 	}
 
 }
