@@ -68,7 +68,3 @@
                     </div>
                 </div> -->
 @endsection
-
-@section('scripts')
-<script type="text/javascript" src="{{ asset('bower_components/social-share.js/dist/js/share.min.js') }}"></script>
-@endsection

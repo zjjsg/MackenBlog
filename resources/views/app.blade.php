@@ -38,7 +38,7 @@
 <script>
     jQuery(document).ready(function($) {
         
-        // geopattern
+        //geopattern
         $('.geopattern').each(function(){
             $(this).geopattern($(this).data('pattern-id'));
         });

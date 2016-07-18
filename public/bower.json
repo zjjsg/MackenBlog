@@ -19,6 +19,7 @@
     "select2": "^4.0.3",
     "jquery": "1.9.1",
     "primer-markdown": "^3.2.0",
-    "octicons": "^4.3.0"
+    "octicons": "^4.3.0",
+    "geopattern": "^1.2.3"
   }
 }

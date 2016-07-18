@@ -22,3 +22,7 @@
 </section>
 
 @endsection
+
+@section('scripts')
+<script src="{{ asset('bower_components/geopattern/js/geopattern.min.js') }}"></script>
+@endsection
