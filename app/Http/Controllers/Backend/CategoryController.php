@@ -18,7 +18,7 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        conversionClassPath(__CLASS__);
+        
     }
 
     /**
