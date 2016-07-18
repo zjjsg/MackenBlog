@@ -61,8 +61,11 @@ a:hover,a:active,#site-header a:hover,#site-header a:active {
 .jumbotron .jumbotron-meta{
     font-size:1em;
 }
- .jumbotron .jumbotron-meta a {
+.jumbotron .jumbotron-meta a {
     color:#f4f4f4;
+}
+.jumbotron .jumbotron-meta a:hover {
+    color:#f4645f !important;
 }
 
 .panel {
