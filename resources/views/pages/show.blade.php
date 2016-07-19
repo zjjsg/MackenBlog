@@ -33,7 +33,7 @@
 @endsection
 
 @endunless
-  
+
 @section('left')
     <article class="article-content markdown-body">
         {!! convert_markdown($article->content) !!}

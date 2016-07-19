@@ -28,7 +28,7 @@
                         {{ str_cut(convert_markdown($article->content),80) }}
                     </p>
                     <p class="repo-list-meta">
-                        <span class="fa fa-clock-o"></span>{{ $article->created_at->format('Y-m-d H:i') }} &nbsp;&nbsp;<span class="fa fa-folder-o"></span><a href="/category/{{ $article->category->slug }}">{{ $article->category->name }}</a>
+                        <span class="fa fa-calendar"></span>{{ $article->created_at->format('Y-m-d') }} &nbsp;&nbsp;<span class="fa fa-folder-o"></span><a href="/category/{{ $article->category->slug }}">{{ $article->category->name }}</a>
                         &nbsp;&nbsp;<span class="fa fa-tags"></span>
                         @foreach($article->tags as $tag)
                             <a href="/tag/{{ $tag->name }}">{{ $tag->name }}</a>&nbsp;
