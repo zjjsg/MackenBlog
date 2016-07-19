@@ -6,11 +6,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\Article;
+use App\Models\ArticleStatus;
 use App\User;
 use Illuminate\Http\Request;
 
-class AboutController extends Controller {
-
+class PageController extends Controller {
 
 	/**
 	 * Display the specified resource.
@@ -18,11 +18,12 @@ class AboutController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show()
+	public function show($id)
 	{
-        $article = Article::getArticleModel('about');
+        $article = Article::getArticleModel($id);
         ArticleStatus::updateViewNumber($article->id);
-        return view('pages.show', compact('article'));
+        $isSinglePage = true;
+        return view('pages.show', compact('article','isSinglePage'));
 	}
 
 }
